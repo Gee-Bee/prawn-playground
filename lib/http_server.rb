@@ -1,18 +1,19 @@
 require "socket"
 
+require_relative "prawn_examples"
+
 require "pathname"
-EXAMPLE_FILES =
-  Dir[File.join(__dir__, "prawn_examples", "*.rb")]
-    .filter { |f| Pathname(f).basename.to_s.start_with?(/\d/) }
-    .sort
-
-EXAMPLE_FILES
-  .each { |f| require f }
-
-EXAMPLE_KLASSES =
-  EXAMPLE_FILES.map
 
 class HttpServer
+  EXAMPLE_FILES =
+    Dir[File.join(__dir__, "prawn_examples", "*.rb")] \
+      .map { |f| Pathname(f).expand_path } \
+      .filter { |pn| pn.basename.to_s.start_with?(/\d/) } \
+      .sort
+
+  EXAMPLE_KLASSES =
+    EXAMPLE_FILES.map { |pn| pn.basename.to_s.sub(/\A\d+_(.*)\.rb\z/, '\1') }
+
   def start(port)
     server = TCPServer.new port
     loop do
@@ -34,7 +35,7 @@ class HttpServer
       .split("/")
 
     klass = (klass || "").split("_").map { |s| s.capitalize }.join
-    klass = EXAMPLE_FILES.include?(klass) ? klass : "BasicConcepts"
+    klass = EXAMPLE_KLASSES.include?(klass) ? klass : "BasicConcepts"
     klass = PrawnExamples.const_get(klass)
 
     method = klass.instance_methods(false).map(&:to_s).include?(method) ? method : "origin"

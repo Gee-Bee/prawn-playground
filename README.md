@@ -1,3 +1,11 @@
-# PrawnExamples
+# Prawn Playground
 
-These are code examples from official [Prawn manual](http://prawnpdf.org/manual.pdf) which you can play around with.
+contains code examples from official [Prawn manual](http://prawnpdf.org/manual.pdf) which you can play around with.
+
+## Running
+
+Run `server` service and then issue request in format `localhost:2000/< module_name >/< example_name >`, for example:
+- `http://localhost:2000/basic_concepts/adding_pages`
+- `http://localhost:2000/graphics/lines_and_curves`
+
+After changing examples in `lib/prawn_examples` there is no need to restart the server, thanks to `listen` and `zeitwerk` gems. Just refresh the browser.
