@@ -14,6 +14,8 @@ require "listen"
 Listen.to(__dir__) { loader.reload }.start
 
 module PrawnExamples
+  DATADIR = File.join(__dir__, "assets")
+
   class Error < StandardError; end
   # Your code goes here...
 end

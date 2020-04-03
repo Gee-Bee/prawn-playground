@@ -4,6 +4,9 @@ contains code examples from official [Prawn manual](http://prawnpdf.org/manual.p
 
 ## Running
 
+Bundle all the gems in volume
+`docker-compose run --rm server bundle`
+
 Run `server` service and then issue request in format `localhost:2000/< module_name >/< example_name >`, for example:
 - `http://localhost:2000/basic_concepts/adding_pages`
 - `http://localhost:2000/graphics/lines_and_curves`

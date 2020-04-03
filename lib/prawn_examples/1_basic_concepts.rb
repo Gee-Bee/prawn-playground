@@ -1,5 +1,3 @@
-require_relative "../prawn_examples.rb"
-
 class PrawnExamples::BasicConcepts
   include Prawn::View
 
